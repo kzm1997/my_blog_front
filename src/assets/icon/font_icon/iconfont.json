@@ -1,0 +1,16 @@
+{
+  "id": "1464355",
+  "name": "no name",
+  "font_family": "v-icon",
+  "css_prefix_text": "v-icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "11269056",
+      "name": "search 搜索 查找",
+      "font_class": "search",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    }
+  ]
+}
