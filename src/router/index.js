@@ -4,6 +4,7 @@ import Index from '@/components/index/Index.vue'
 import SimpleHeader from '@/components/header/SimpleHeader.vue'
 import Login from '@/components/ivews/login/Login.vue'
 import Footer from '@/components/footer/FooterComponent'
+import HomeContent from '@/components/content/HomeContent'
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
             name:'index',
             components:{
                 header:SimpleHeader,
+                content:HomeContent,
                 footer:Footer
             }
         },

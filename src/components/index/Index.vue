@@ -13,9 +13,10 @@
 </script>
 
 <style lang="scss">
-    .main-wrapper{
-        background-color: #fff;
+    .main-wrapper {
         width: 100%;
         margin: 0 auto;
     }
+
+
 </style>

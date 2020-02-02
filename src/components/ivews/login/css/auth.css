@@ -90,7 +90,7 @@ body {
 
 .lowin .lowin-box {
 	width: 100%;
-	position: absolute;
+	flex:1;
 	left: 0;
 }
 

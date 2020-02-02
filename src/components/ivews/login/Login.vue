@@ -40,6 +40,11 @@
 <style scoped>
    @import "css/auth.css";
    .v-login{
-       min-height: calc(100vh - 250px);
+       padding-top: 100px;
+       padding-bottom: 100px;
    }
+    .lowin-wrapper{
+        display: flex;
+
+    }
 </style>

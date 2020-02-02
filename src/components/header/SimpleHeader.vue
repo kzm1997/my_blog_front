@@ -1,9 +1,8 @@
 <template>
     <div>
 
-
         <div class="header">
-
+          <div class="inner">
             <div class="header__left">
                 <div class="logo">
                     <img src="@/assets/kblog.png">
@@ -26,8 +25,14 @@
                             background-color="#545c64"
                             text-color="#fff"
                             active-text-color="#ffd04b">
-                        <el-menu-item index="1">文章</el-menu-item>
-                        <el-menu-item index="1">阅读</el-menu-item>
+                        <el-menu-item index="1">首页</el-menu-item>
+                        <el-submenu index="2">
+                            <template slot="title">我的工作台</template>
+                            <el-menu-item index="2-1">选项1</el-menu-item>
+                            <el-menu-item index="2-2">选项2</el-menu-item>
+                            <el-menu-item index="2-3">选项3</el-menu-item>
+
+                        </el-submenu>
                     </el-menu>
                 </div>
                 <div class="header__right_right">
@@ -47,7 +52,7 @@
                 </div>
             </div>
         </div>
-
+        </div>
     </div>
 </template>
 
@@ -63,17 +68,21 @@
 
     .header {
         width: 100%;
-        /*position: fixed;*/
+        position: fixed;
         top: 0;
         left: 0;
         right: 0;
         display: flex;
+        z-index: 999;
         height: 60px;
+        .inner{
+            width: 100%;
+            display: flex;
+        }
     }
 
     .header__left {
         width: 700px;
-        /*flex: 1;*/
         align-items: center;
         display: flex;
         justify-content: space-between;
