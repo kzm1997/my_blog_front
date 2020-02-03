@@ -5,6 +5,7 @@
             <span>|</span>
             {{siteInfo.copyright}}
             <span v-html="siteInfo.copyright_desc"></span>
+            <i class="iconfont iconcopyright-fill"></i>
         </p>
     </div>
 </template>
@@ -16,7 +17,7 @@
                siteInfo:{
                    info:'纯个人网站,有事联系10086',
                    copyright:'版权所有,@kzm.com 2020-2100',
-                   copyright_desc:'个人网站,以商用目的使用需要获取许可,非商业使用请随意玩耍,cc'
+                   copyright_desc:'个人网站,以商用目的使用需要获取许可,非商业使用请随意玩耍 '
                }
            }
        }

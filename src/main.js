@@ -3,9 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
-/*import VueIconfont  from  'vue-iconfont'
-import '@/assets/icon/font_icon/iconfont.css';
-import '@/assets/icon/font_icon/iconfont.js';*/
+import '@/assets/icon/font_icon/iconfont.css'
 import '@/assets/theme/index.css';
 
 import  {
@@ -17,7 +15,8 @@ import  {
     MenuItem,
     Divider,
     MenuItemGroup,
-    Message
+    Message,
+    Avatar
 } from 'element-ui'
 Vue.use(Button);
 Vue.use(Menu);
@@ -27,6 +26,7 @@ Vue.use(MenuItemGroup);
 Vue.use(Card);
 Vue.use(Tag);
 Vue.use(Divider);
+Vue.use(Avatar);
 
 Vue.prototype.$message = Message;
 /*Vue.use(VueIconfont, [

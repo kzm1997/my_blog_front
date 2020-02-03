@@ -2,12 +2,12 @@
     <el-card>
         <h1>kzm</h1>
         <div class="me-author-description">
-            <span><i class="el-icon-location-outline"></i> &nbsp;山东&济南</span>
-            <span><i class="me-icon-job"></i> &nbsp;java开发工程师</span>
+            <span><i class="iconfont icondizhi"></i> &nbsp;福建&nbsp;光泽</span>
+            <span><i class="iconfont iconzhiye"></i> &nbsp;Java开发</span>
         </div>
         <div class="me-author-tool">
-            <i @click="showTool(qq)" :title="qq.title" class="me-icon-QQ">qq</i>
-            <i @click="showTool(github)" :title="github.title" class="me-icon-github"></i>
+            <i @click="showTool(qq)" :title="qq.title" class="iconfont iconqq"></i>
+            <i @click="showTool(github)" :title="github.title" class="iconfont iconGitHub"></i>
         </div>
     </el-card>
 </template>
@@ -36,6 +36,29 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+    h1{
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 1.5;
+        letter-spacing: 2px;
+    }
+    .me-author-description{
+        border-top: 1px solid #DCDFE6;
+        padding-top: 12px;
+        span:nth-of-type(1){
+            margin-right: 26px;
+        }
+    }
+    .me-author-tool {
+        padding-top: 20px;
+        .iconfont.iconqq {
+            margin-right: 20px;
+            font-size: 30px;
+        }
+        .iconfont.iconGitHub {
+            font-size: 30px;
+        }
+    }
 
 </style>

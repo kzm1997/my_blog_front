@@ -13,7 +13,9 @@
             <div class="content_right_person">
               <card-me></card-me>
             </div>
-            <div class="content_right_hot"></div>
+            <div class="content_right_hot">
+              <card-tag></card-tag>
+            </div>
             <div class="content_right_hotpaper"></div>
         </div>
     </div>
@@ -23,6 +25,7 @@
     import articlePage from '@/components/ivews/article/articlePage.vue';
     import IndexCategoryHot from  '@/components/indexCategory/indexCategoryHot.vue';
     import CardMe from '@/components/card/CardMe.vue';
+    import CardTag from '@/components/card/CardTag.vue';
 
     export default {
         name: "HomeContent",
@@ -32,7 +35,8 @@
         components: {
             articlePage,
             IndexCategoryHot,
-            CardMe
+            CardMe,
+            CardTag
         }
     }
 </script>
@@ -68,9 +72,9 @@
             margin-left: 30px;
             width: 300px;
             height: 700px;
-            border: 1px solid gray;
+            border: 1px solid;
             .content_right_person{
-
+              margin-bottom: 20px;
             }
         }
     }
