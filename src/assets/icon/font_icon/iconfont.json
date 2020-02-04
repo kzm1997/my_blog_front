@@ -27,6 +27,13 @@
       "unicode_decimal": 58948
     },
     {
+      "icon_id": "980979",
+      "name": "编辑",
+      "font_class": "weibiaoti520",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
       "icon_id": "1002158",
       "name": "QQ",
       "font_class": "qq",
@@ -109,6 +116,13 @@
       "font_class": "zhiye",
       "unicode": "e611",
       "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "10262050",
+      "name": "设 置",
+      "font_class": "shezhi",
+      "unicode": "e612",
+      "unicode_decimal": 58898
     },
     {
       "icon_id": "11635208",

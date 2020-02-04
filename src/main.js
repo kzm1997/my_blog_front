@@ -16,7 +16,24 @@ import  {
     Divider,
     MenuItemGroup,
     Message,
-    Avatar
+    Avatar,
+    Form,
+    Radio,
+    RadioButton,
+    RadioGroup,
+    Checkbox,
+    CheckboxButton,
+    CheckboxGroup,
+    Input,
+    InputNumber,
+    FormItem,
+    Select,
+    Cascader,
+    Switch,
+    Slider,
+    TimePicker,
+    DatePicker,
+    Upload
 } from 'element-ui'
 Vue.use(Button);
 Vue.use(Menu);
@@ -27,7 +44,23 @@ Vue.use(Card);
 Vue.use(Tag);
 Vue.use(Divider);
 Vue.use(Avatar);
-
+Vue.use(Form);
+Vue.use(Radio);
+Vue.use(RadioButton);
+Vue.use(RadioGroup);
+Vue.use(Checkbox);
+Vue.use(CheckboxButton);
+Vue.use(CheckboxGroup);
+Vue.use(Input);
+Vue.use(InputNumber);
+Vue.use(FormItem);
+Vue.use(Select);
+Vue.use(Cascader);
+Vue.use(Switch);
+Vue.use(Slider);
+Vue.use(TimePicker);
+Vue.use(DatePicker);
+Vue.use(Upload)
 Vue.prototype.$message = Message;
 /*Vue.use(VueIconfont, [
     {

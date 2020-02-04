@@ -8,68 +8,84 @@ import HomeContent from '@/components/content/HomeContent'
 import Register from '@/components/ivews/login/Register'
 import PersonPage from '@/components/ivews/Person/PersonPage'
 import PersonEdit from '@/components/ivews/Person/PersonEdit'
+import BaseMaterialEdit from '@/components/person/BaseMaterialEdit'
+import AvatarEdit from '@/components/person/AvatarEdit'
+
 Vue.use(VueRouter)
 
 const routes = [
 
-  {
-    path: '/',
-    name: 'Index',
-    component:Index,
-    children:[
-        {
-            path:'/',
-            name:'index',
-            components:{
-                header:SimpleHeader,
-                content:HomeContent,
-                footer:Footer
+    {
+        path: '/',
+        name: 'Index',
+        component: Index,
+        children: [
+            {
+                path: '/',
+                name: 'index',
+                components: {
+                    header: SimpleHeader,
+                    content: HomeContent,
+                    footer: Footer
+                }
+            },
+            {
+                path: 'login',
+                name: 'login',
+                components: {
+                    header: SimpleHeader,
+                    content: Login,
+                    footer: Footer
+                }
+            },
+            {
+                path: 'register',
+                name: 'register',
+                components: {
+                    header: SimpleHeader,
+                    content: Register,
+                    footer: Footer
+                }
+            },
+            {
+                path: 'person',
+                name: 'person',
+                components: {
+                    header: SimpleHeader,
+                    content: PersonPage,
+                    footer: Footer
+                }
+            },
+            {
+                path: 'personedit',
+                name: 'personedit',
+                components: {
+                    header: SimpleHeader,
+                    content: PersonEdit,
+                    footer: Footer
+                },
+                children: [
+                    {
+                        path: 'basematerialedit',
+                        name: 'basematerialedit',
+                        component: BaseMaterialEdit
+                    },
+                    {
+                        path:'avataredit',
+                        name:'avataredit',
+                        component:AvatarEdit
+                    }
+                ]
             }
-        },
-        {
-            path:'login',
-            name:'login',
-            components:{
-                header:SimpleHeader,
-                content:Login,
-                footer:Footer
-            }
-        },
-        {
-            path:'register',
-            name:'register',
-            components:{
-                header:SimpleHeader,
-                content: Register,
-                footer:Footer
-            }
-        },
-        {
-            path:'person',
-            name: 'person',
-            components:{
-                header:SimpleHeader,
-                content:PersonPage,
-                footer:Footer
-            }
-        },
-        {
-            path:'personedit',
-            name:'personedit',
-            components:{
-                header:SimpleHeader,
-                content: PersonEdit,
-                footer:Footer
-            }
-        }
 
-    ]
-  }
+        ]
+    }
 
 ]
 
 const router = new VueRouter({
-  routes
+    mode: 'history',
+    routes
 })
 
 export default router
