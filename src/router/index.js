@@ -10,6 +10,8 @@ import PersonPage from '@/components/ivews/Person/PersonPage'
 import PersonEdit from '@/components/ivews/Person/PersonEdit'
 import BaseMaterialEdit from '@/components/person/BaseMaterialEdit'
 import AvatarEdit from '@/components/person/AvatarEdit'
+import AccountEdit from '@/components/person/AccountEdit'
+import ExtendsInformation from '@/components/person/ExtendsInformation'
 
 Vue.use(VueRouter)
 
@@ -62,7 +64,6 @@ const routes = [
                 components: {
                     header: SimpleHeader,
                     content: PersonEdit,
-                    footer: Footer
                 },
                 children: [
                     {
@@ -74,6 +75,16 @@ const routes = [
                         path:'avataredit',
                         name:'avataredit',
                         component:AvatarEdit
+                    },
+                    {
+                        path:'accountedit',
+                        name:'accountedit',
+                        component:AccountEdit
+                    },
+                    {
+                        path:'extendsinformation',
+                        name:'extendsinformation',
+                        component:ExtendsInformation
                     }
                 ]
             }

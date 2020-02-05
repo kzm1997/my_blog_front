@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div class="home_header">
             <div class="inner">
                 <div class="header__left">
@@ -47,7 +46,7 @@
                                 background-color="#545c64"
                                 text-color="#fff"
                                 active-text-color="#ffd04b">
-                            <el-menu-item index="1">首页</el-menu-item>
+                            <router-link :to="{path:'/'}"><el-menu-item index="1">首页</el-menu-item></router-link>
                             <el-menu-item index="1">文章分类</el-menu-item>
                             <el-menu-item index="1">标签</el-menu-item>
                             <el-menu-item index="1">时光轴</el-menu-item>

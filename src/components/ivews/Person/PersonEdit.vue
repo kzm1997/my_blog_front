@@ -6,10 +6,8 @@
                     <i class="iconfont iconshezhi"></i><span>设置</span>
                 </div>
                 <ul>
-                    <a  v-for="(item) in leftClicks" :key="item.id" :href="item.link"
-                       :class="{isactive:item.active}" @click="activeMenu(item.id)">
-                        <li>{{item.name}}</li>
-                    </a>
+                    <li v-for="(item) in leftClicks" :key="item.id"
+                        :class="{isactive:item.active}" @click="activeMenu(item.id)">{{item.name}}</li>
                 </ul>
 
             </el-card>
@@ -28,19 +26,21 @@
                 leftClicks: [
                     {id: 0, name: '基本资料', link: '/personedit/basematerialedit', active: true},
                     {id: 1, name: '修改头像', link: '/personedit/avataredit', active: false},
-                    {id: 2, name: '账号设置', link: '/#', active: false},
-                    {id: 3, name: '扩展资料', link: '/#', active: false}
+                    {id: 2, name: '账号设置', link: '/personedit/accountedit', active: false},
+                    {id: 3, name: '扩展资料', link: '/personedit/extendsinformation', active: false}
                 ]
             }
         },
         methods: {
             activeMenu(id) {
+                this.$router.push(this.leftClicks[id].link)
                 this.leftClicks.forEach(function (item) {
                     item.active=false;
                 })
                this.leftClicks[id].active=true;
             }
         }
+
     }
 </script>
 
@@ -68,11 +68,12 @@
             .header span {
                 display: inline-block;
             }
-            ul a {
+            ul li {
                 color: #0D1015;
                 display: block;
                 padding: 7px 14px;
                 border-radius: .25rem;
+                cursor: pointer;
             }
 
 

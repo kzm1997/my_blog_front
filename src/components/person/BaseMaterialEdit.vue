@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="base_container">
         <el-card>
             <div slot="header" class="header">
                 <span>个人信息</span>
@@ -76,17 +76,20 @@
 </script>
 
 <style scoped lang="scss">
-   .el-form{
-       margin-right: 360px;
-       text-align: left;
-       .el-form-item__content{
-           text-align: center;
-       }
-       .sex{
-           display: flex;
-           .sexgroup{
-               margin-left: 90px;
-           }
-       }
-   }
+    .base_container {
+        text-align: left;
+        .el-form {
+            margin-right: 360px;
+            text-align: left;
+            .el-form-item__content {
+                text-align: center;
+            }
+            .sex {
+                display: flex;
+                .sexgroup {
+                    margin-left: 90px;
+                }
+            }
+        }
+    }
 </style>
