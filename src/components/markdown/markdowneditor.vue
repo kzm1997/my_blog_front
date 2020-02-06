@@ -24,6 +24,11 @@
     }
 </script>
 
-<style scoped lang="scss">
-
+<style  lang="scss">
+    .me-editor{
+        z-index: 6 !important;
+    }
+    .v-note-wrapper.fullscreen {
+        top: 60px !important
+    }
 </style>

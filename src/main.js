@@ -33,7 +33,10 @@ import  {
     Slider,
     TimePicker,
     DatePicker,
-    Upload
+    Upload,
+    Dropdown,
+    DropdownItem,
+    DropdownMenu
 } from 'element-ui'
 Vue.use(Button);
 Vue.use(Menu);
@@ -60,7 +63,10 @@ Vue.use(Switch);
 Vue.use(Slider);
 Vue.use(TimePicker);
 Vue.use(DatePicker);
-Vue.use(Upload)
+Vue.use(Upload);
+Vue.use(Dropdown);
+Vue.use(DropdownMenu);
+Vue.use(DropdownItem);
 Vue.prototype.$message = Message;
 /*Vue.use(VueIconfont, [
     {

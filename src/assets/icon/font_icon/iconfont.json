@@ -55,13 +55,6 @@
       "unicode_decimal": 58915
     },
     {
-      "icon_id": "2552077",
-      "name": "个人主页",
-      "font_class": "gerenzhuye",
-      "unicode": "e621",
-      "unicode_decimal": 58913
-    },
-    {
       "icon_id": "2742646",
       "name": "链接",
       "font_class": "lianjie",
@@ -95,6 +88,13 @@
       "font_class": "xiaoxitongzhitixinglingshenglingdang",
       "unicode": "e794",
       "unicode_decimal": 59284
+    },
+    {
+      "icon_id": "6204089",
+      "name": "个人",
+      "font_class": "geren",
+      "unicode": "e607",
+      "unicode_decimal": 58887
     },
     {
       "icon_id": "6682541",

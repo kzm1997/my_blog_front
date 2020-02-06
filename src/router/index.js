@@ -12,6 +12,7 @@ import BaseMaterialEdit from '@/components/person/BaseMaterialEdit'
 import AvatarEdit from '@/components/person/AvatarEdit'
 import AccountEdit from '@/components/person/AccountEdit'
 import ExtendsInformation from '@/components/person/ExtendsInformation'
+import blogwrite from '@/components/ivews/blog/blogwrite'
 
 Vue.use(VueRouter)
 
@@ -87,6 +88,13 @@ const routes = [
                         component:ExtendsInformation
                     }
                 ]
+            },
+            {
+                path:'write',
+                name:'write',
+                components:{
+                    content:blogwrite
+                }
             }
 
         ]
