@@ -8,5 +8,8 @@ module.exports = {
                 "@$": path.resolve(__dirname, 'public/')
             }
         }
+    },
+    devServer:{
+        port:9090
     }
 }

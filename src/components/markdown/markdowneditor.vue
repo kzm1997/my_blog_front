@@ -1,6 +1,8 @@
 <template>
     <mavon-editor
             class="me-editor"
+            ref="md"
+            v-model="detail.content"
             >
     </mavon-editor>
 </template>
@@ -10,6 +12,9 @@
     import 'mavon-editor/dist/css/index.css'
     export default {
         name: "markdowneditor",
+        props:{
+            detail:Object
+        },
         data(){
             return{
 

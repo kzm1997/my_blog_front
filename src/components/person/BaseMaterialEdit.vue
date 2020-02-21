@@ -91,5 +91,10 @@
                 }
             }
         }
+      /*  textarea{
+            margin: 0px !important;
+            padding: 0px !important;
+            resize: none !important;
+        }*/
     }
 </style>

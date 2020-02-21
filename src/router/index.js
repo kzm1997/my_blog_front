@@ -12,7 +12,8 @@ import BaseMaterialEdit from '@/components/person/BaseMaterialEdit'
 import AvatarEdit from '@/components/person/AvatarEdit'
 import AccountEdit from '@/components/person/AccountEdit'
 import ExtendsInformation from '@/components/person/ExtendsInformation'
-import blogwrite from '@/components/ivews/blog/blogwrite'
+import blogwrite from '@/components/ivews/blog/BlogWrite'
+import ArticleView from '@/components/ivews/article/articleView'
 
 Vue.use(VueRouter)
 
@@ -94,6 +95,14 @@ const routes = [
                 name:'write',
                 components:{
                     content:blogwrite
+                }
+            },
+            {
+                path:'articleView',
+                name:'articleView',
+                components:{
+                    header:SimpleHeader,
+                    content:ArticleView
                 }
             }
 

@@ -68,12 +68,16 @@
             .header span {
                 display: inline-block;
             }
+            ul{
+                padding-left: 0px;
+            }
             ul li {
                 color: #0D1015;
                 display: block;
                 padding: 7px 14px;
                 border-radius: .25rem;
                 cursor: pointer;
+
             }
 
 

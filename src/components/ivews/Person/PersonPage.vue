@@ -9,7 +9,7 @@
 
                 <div class="header_information">
                     <div class="header_information_title">
-                        <h1>个人用户名</h1>
+                        <h1 class="person_name">个人用户名</h1>
                         <el-button @click="toBaseEdit" type="text" class="title_button" size="medium">编辑资料</el-button>
                     </div>
                     <span><i class="iconfont icondizhi1"></i>填写现居城市</span>
@@ -127,7 +127,7 @@
                         font-size: 16px;
                     }
                 }
-                h1 {
+                .person_name {
                     font-size: 28px;
                     font-weight: 500;
                     line-height: 1.2;

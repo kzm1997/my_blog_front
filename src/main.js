@@ -5,6 +5,7 @@ import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/icon/font_icon/iconfont.css'
 import '@/assets/theme/index.css';
+import Scrollspy from 'vue2-scrollspy';
 
 import  {
     Button,
@@ -36,7 +37,12 @@ import  {
     Upload,
     Dropdown,
     DropdownItem,
-    DropdownMenu
+    DropdownMenu,
+    Container,
+    Main,
+    Dialog,
+    MessageBox,
+    Tooltip
 } from 'element-ui'
 Vue.use(Button);
 Vue.use(Menu);
@@ -67,14 +73,14 @@ Vue.use(Upload);
 Vue.use(Dropdown);
 Vue.use(DropdownMenu);
 Vue.use(DropdownItem);
+Vue.use(Container);
+Vue.use(Main);
+Vue.use(Dialog);
+Vue.use(Tooltip);
 Vue.prototype.$message = Message;
-/*Vue.use(VueIconfont, [
-    {
-        tag: 'v-icon',
-        prefix: 'v-icon',
-        type: 'font'
-    }
-])*/
+Vue.prototype.$confirm=MessageBox.confirm;
+
+Vue.use(Scrollspy);
 Vue.config.productionTip = false
 
 new Vue({

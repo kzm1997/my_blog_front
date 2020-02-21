@@ -1,6 +1,6 @@
 <template>
     <el-card>
-        <h1>kzm</h1>
+        <h1 class="person_name">kzm</h1>
         <div class="me-author-description">
             <span><i class="iconfont icondizhi"></i> &nbsp;福建&nbsp;光泽</span>
             <span><i class="iconfont iconzhiye"></i> &nbsp;Java开发</span>
@@ -37,7 +37,7 @@
 </script>
 
 <style scoped lang="scss">
-    h1{
+    h1.person_name{
         font-size: 30px;
         font-weight: bold;
         line-height: 1.5;
