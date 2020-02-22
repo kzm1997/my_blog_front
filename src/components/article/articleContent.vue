@@ -21,8 +21,7 @@
                     <span class="label_read">阅读:100</span>
                 </div>
             </div>
-            <div class="article_main_body markdown-body" v-html="content" id="kCatelog">
-
+            <div class="article_main_body markdown-body js-toc-content" v-html="content" >
             </div>
 
         </div>
@@ -41,14 +40,13 @@
               }
             }
         },
-        mounted(){
+          beforeMount(){
             this.getContent();
         },
         methods:{
           getContent(){
              this.content=marked('### Java基础\n' +
-                 '#### 1. 两个对象的 hashCode()相同，则 equals()也一定为 true，对吗？两个对象用equals方法比较为true，它们的hashcode值相同吗？\n' +
-                 '不对，两个对象的hashCode相同，equals()不一定true，equals()方法为true，他们的hashcode也不一定相同。\n' +
+                 '#### 1. 两个对象的 hashCode()相同\n' +
                  '代码实例:\n' +
                  '```java\n' +
                  'String str1 = "通话";\n' +

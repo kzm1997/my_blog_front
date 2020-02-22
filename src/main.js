@@ -5,7 +5,6 @@ import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/icon/font_icon/iconfont.css'
 import '@/assets/theme/index.css';
-import Scrollspy from 'vue2-scrollspy';
 
 import  {
     Button,
@@ -79,9 +78,8 @@ Vue.use(Dialog);
 Vue.use(Tooltip);
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm=MessageBox.confirm;
-
-Vue.use(Scrollspy);
 Vue.config.productionTip = false
+
 
 new Vue({
   router,

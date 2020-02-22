@@ -1,6 +1,6 @@
 <template>
-    目录容器
-    <div class="k-catelog-list" id="catelogList"></div>
+    <!--目录容器-->
+    <div class="k-catelog-list" id="side-toc"></div>
 </template>
 
 <script>

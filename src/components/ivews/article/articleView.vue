@@ -5,10 +5,16 @@
             <article-content></article-content>
         </div>
         <div class="article_view_right">
-            <el-card>
-                <div>
-                    <!--<article-dictory></article-dictory>-->
+            <el-card>1111</el-card>
+            <el-card>1111</el-card>
+            <el-card>1111</el-card>
+            <el-card>1111</el-card>
+            <el-card>1111</el-card>
+            <el-card class="js-toc">
+                <div slot="header" class="clearfix">
+                    <span class="dictory">目录</span>
                 </div>
+                <nav class="toc"></nav>
             </el-card>
         </div>
     </div>
@@ -16,8 +22,7 @@
 
 <script>
     import articleContent from '@/components/article/articleContent'
-    // import articleDictory from '@/components/article/articleDictory'
-    // import katelog from 'katelog'
+    import  tocbot from 'tocbot';
     export default {
         name: "articleView",
         data(){
@@ -27,27 +32,29 @@
         },
         components:{
             articleContent
-            // articleDictory
         },
-       /* mounted(){
-            new katelog({
-                contentEl: 'kCatelog',
-                catelogEl: 'catelogList',
-                linkClass: 'k-catelog-link',
-                linkActiveClass: 'k-catelog-link-active',
-                supplyTop: 20,
-                selector: ['h2', 'h3','h4','h5'],
-                active: function (el) {
-                    console.log(el);
-                }
+        mounted(){
+            tocbot.init({
+                // Where to render the table of contents.
+                tocSelector: '.toc',
+                // Where to grab the headings to build the table of contents.
+                contentSelector: '.js-toc-content',
+                // Which headings to grab inside of the contentSelector element.
+                headingSelector: 'h1, h2, h3, h4, h5',
+                // For headings inside relative or absolute positioned containers within content.
+                hasInnerContainers: true,
+                scrollSmooth: true,
+                scrollSmoothOffset: -80,
+                headingsOffset: -500
             });
-        }*/
+        }
     }
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
+   @import "~tocbot/dist/tocbot.css";
       .article_view{
-          width: 1200px;
+          width: 1200px ;
           margin: 120px auto;
           display: flex;
           .article_view_left{
@@ -56,6 +63,17 @@
           }
           .article_view_right{
               flex: 1;
+             .js-toc{
+                 position: sticky;
+                 top: 200px;
+                 text-align: left;
+                 .dictory{
+                     font-weight: bold;
+                 }
+             }
+
+
           }
       }
+
 </style>
