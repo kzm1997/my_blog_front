@@ -3,6 +3,10 @@
         <div class="article_view_left">
             <!--抽成组件-->
             <article-content></article-content>
+            <el-card class="comment">
+                <comment :comments="commentData"></comment>
+            </el-card>
+
         </div>
         <div class="article_view_right">
             <el-card>1111</el-card>
@@ -23,15 +27,18 @@
 <script>
     import articleContent from '@/components/article/articleContent'
     import  tocbot from 'tocbot';
+    import * as CommentData from '../../comment/mock';
+    import comment from '@/components/comment/comment.vue';
     export default {
         name: "articleView",
         data(){
             return{
-
+               commentData:[]
             }
         },
         components:{
-            articleContent
+            articleContent,
+            comment
         },
         mounted(){
             tocbot.init({
@@ -45,8 +52,9 @@
                 hasInnerContainers: true,
                 scrollSmooth: true,
                 scrollSmoothOffset: -80,
-                headingsOffset: -500
+                headingsOffset: 200
             });
+            this.commentData=CommentData.comment.data;
         }
     }
 </script>
@@ -71,8 +79,10 @@
                      font-weight: bold;
                  }
              }
-
-
+          }
+          .comment{
+              margin-top: 30px;
+              text-align: left;
           }
       }
 
