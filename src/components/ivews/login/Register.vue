@@ -25,7 +25,7 @@
                                 注册
                             </button>
                             <div class="text-foot">
-                                已有账号? <a href="" class="register-link">登录</a>
+                                已有账号?  <router-link :to="{name:'login'}">登录</router-link>
                             </div>
                         </form>
                     </div>
@@ -39,7 +39,9 @@
     export default {
         name: "Register",
         data(){
+            return{
 
+            }
         }
     }
 </script>
@@ -47,11 +49,14 @@
 <style scoped lang="scss">
     @import "css/auth.css";
     .v-register{
-        padding-top: 100px;
+        padding-top: 50px;
         padding-bottom: 100px;
     }
     .lowin-wrapper{
         display: flex;
+        .lowin-group{
+             margin-bottom: 40px;
+        }
 
     }
 </style>

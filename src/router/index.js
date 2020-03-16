@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '@/components/index/Index.vue'
+import auth from '@/utils/auth'
+import store from '@/store'
+import {Message} from 'element-ui'
 import SimpleHeader from '@/components/header/SimpleHeader.vue'
 import Login from '@/components/ivews/login/Login.vue'
 import Footer from '@/components/footer/FooterComponent'
@@ -14,6 +17,8 @@ import AccountEdit from '@/components/person/AccountEdit'
 import ExtendsInformation from '@/components/person/ExtendsInformation'
 import blogwrite from '@/components/ivews/blog/BlogWrite'
 import ArticleView from '@/components/ivews/article/articleView'
+import CategoryView from '@/components/ivews/category/categoryView'
+import TagView from '@/components/ivews/category/tagView'
 
 Vue.use(VueRouter)
 
@@ -58,6 +63,9 @@ const routes = [
                     header: SimpleHeader,
                     content: PersonPage,
                     footer: Footer
+                },
+                meta:{
+                    requireLogin:true
                 }
             },
             {
@@ -74,35 +82,54 @@ const routes = [
                         component: BaseMaterialEdit
                     },
                     {
-                        path:'avataredit',
-                        name:'avataredit',
-                        component:AvatarEdit
+                        path: 'avataredit',
+                        name: 'avataredit',
+                        component: AvatarEdit
                     },
                     {
-                        path:'accountedit',
-                        name:'accountedit',
-                        component:AccountEdit
+                        path: 'accountedit',
+                        name: 'accountedit',
+                        component: AccountEdit
                     },
                     {
-                        path:'extendsinformation',
-                        name:'extendsinformation',
-                        component:ExtendsInformation
+                        path: 'extendsinformation',
+                        name: 'extendsinformation',
+                        component: ExtendsInformation
                     }
                 ]
             },
             {
-                path:'write',
-                name:'write',
-                components:{
-                    content:blogwrite
+                path: 'write',
+                name: 'write',
+                components: {
+                    content: blogwrite
+                },
+                meta:{
+                    requireLogin:true
                 }
             },
             {
-                path:'articleView',
-                name:'articleView',
-                components:{
-                    header:SimpleHeader,
-                    content:ArticleView
+                path: 'articleView',
+                name: 'articleView',
+                components: {
+                    header: SimpleHeader,
+                    content: ArticleView
+                }
+            },
+            {
+                path: 'category',
+                name: 'category',
+                components: {
+                    header: SimpleHeader,
+                    content: CategoryView
+                }
+            },
+            {
+                path: 'tag/:id',
+                name: 'tag',
+                components: {
+                    header: SimpleHeader,
+                    content: TagView
                 }
             }
 
@@ -111,9 +138,40 @@ const routes = [
 
 ]
 
+
 const router = new VueRouter({
     mode: 'history',
     routes
+})
+
+router.beforeEach((to, from, next) => {
+    //todo 这里可能要token过期判断
+    if (auth.getToken()) {
+        console.log(111)
+        if (to.path === '/login' || to.path === '/register') {
+            next({path: '/'})
+        } else {
+            if (store.state.user.nickname.length === 0) {
+                store.dispatch('getUserInfo').then(() => {
+                    next()
+                }).catch(() => {
+                    next({path: '/'})
+                })
+            }
+        }
+    } else {
+        console.log(222)
+        if (to.matched.some(r =>r.meta.requireLogin)){
+            console.log(333)
+            Message({
+                type: 'warning',
+                showClose: true,
+                message: '请先登录哦'
+            })
+            next(from)
+        }
+        next()
+    }
 })
 
 export default router

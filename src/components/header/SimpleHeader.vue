@@ -27,17 +27,28 @@
                                 mode="horizontal"
                                 background-color="#545c64"
                                 text-color="#fff"
+                                active-text-color="#fff"
                                 menu-trigger="click"
                         >
                             <template v-if="!write">
                                 <router-link :to="{path:'/'}">
                                     <el-menu-item index="1">首页</el-menu-item>
                                 </router-link>
+                                <router-link :to="{path:'/'}">
                                 <el-menu-item index="1">文章分类</el-menu-item>
+                                </router-link>
+                                <router-link :to="{path:'/'}">
                                 <el-menu-item index="1">标签</el-menu-item>
+                                </router-link>
+                                <router-link :to="{path:'/'}">
                                 <el-menu-item index="1">时光轴</el-menu-item>
+                                </router-link>
+                                <router-link :to="{path:'/'}">
                                 <el-menu-item index="1">登录</el-menu-item>
+                                </router-link>
+                                <router-link :to="{path:'/'}">
                                 <el-menu-item index="1">注册</el-menu-item>
+                                </router-link>
                                 <el-dropdown class="me_drop" >
                                 <span class=" el-dropdown-link">
                                     <el-avatar
@@ -76,7 +87,6 @@
                 login: false
             }
         },
-
         components: {}
     }
 </script>

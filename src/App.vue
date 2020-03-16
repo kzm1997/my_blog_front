@@ -10,3 +10,8 @@
         font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", "Segoe UI", "Hiragino Sans GB", "Microsoft Yahei", sans-serif
     }
 </style>
+<script>
+    export default {
+
+    }
+</script>

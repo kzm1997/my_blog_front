@@ -5,7 +5,11 @@ import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
 import '@/assets/icon/font_icon/iconfont.css'
 import '@/assets/theme/index.css';
+import httpRequest from '@/utils/httpRequest';
 
+import { VeeValidate ,config} from './validate/validate'
+
+Vue.use(VeeValidate,config);
 import  {
     Button,
     Menu,
@@ -41,7 +45,8 @@ import  {
     Main,
     Dialog,
     MessageBox,
-    Tooltip
+    Tooltip,
+    Pagination
 } from 'element-ui'
 Vue.use(Button);
 Vue.use(Menu);
@@ -75,10 +80,14 @@ Vue.use(DropdownItem);
 Vue.use(Container);
 Vue.use(Main);
 Vue.use(Dialog);
+Vue.use(Pagination);
 Vue.use(Tooltip);
 Vue.prototype.$message = Message;
 Vue.prototype.$confirm=MessageBox.confirm;
 Vue.config.productionTip = false
+Vue.prototype.$http=httpRequest;
+
+
 
 
 new Vue({

@@ -32,10 +32,7 @@
                     </div>
                     <div id="placeholder" style="visibility: hidden;height: 89px;display: none;"></div>
                     <markdown-editor :detail="articleForm.article" class="me-write-editor"></markdown-editor>
-                    <h1>11111</h1>
-                    <h2>22222</h2>
-                    <h3>2222</h3>
-                    <h1>222222</h1>
+
                 </el-main>
             </el-container>
             <el-dialog
