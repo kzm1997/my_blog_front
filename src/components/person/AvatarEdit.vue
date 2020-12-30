@@ -59,6 +59,7 @@
 
 <script>
     import {VueCropper} from 'vue-cropper'
+    import {uploadFile} from "../../api/upload";
 
     export default {
         name: 'cropper',
@@ -90,7 +91,6 @@
                 uploadImgRelaPath: '', // 上传后的图片的地址（不带服务器域名）
             }
         },
-        props: ["uploadType"],
         methods: {
             // 放大/缩小
             changeScale(num) {
@@ -113,23 +113,20 @@
                 // 输出
                 if (type === 'blob') {
                     this.$refs.cropper.getCropBlob((data) => {
-                        let img = window.URL.createObjectURL(data)
-                        console.log(img);
-                        formData.append('multfile', data, _this.fileName)
-                        formData.append('operaType', this.uploadType)
-                        this.$store.dispatch('UPLOAD_HEAD', formData)
-                            .then(res => {
-                                let data = res.data.data;
-                                this.$emit("upload", data);
-                                this.$message.success('上传成功！')
-                            }).catch(err => {
-                            if (err.data) {
-                                this.$message.error(err.data.msg)
-                            } else {
-                                this.$message.error('上传失败！')
-                            }
-                        })
+                        formData.append('file', data, _this.fileName);
+                        formData.append('type','avatar');
+                       uploadFile(formData).then((res) => {
+                           if (res.data.status == 0) {
+                               this.$message({
+                                   showClose: true,
+                                   type:'success',
+                                   message: '上传头像成功'
+                               });
+                           }
+                           this.$store.dispatch('getUserInfo');
+                       })
                     })
+
                 } else {
                     this.$refs.cropper.getCropData((data) => {
                         console.log(data);

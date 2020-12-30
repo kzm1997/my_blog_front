@@ -1,6 +1,8 @@
 import VeeValidate, { Validator } from 'vee-validate'
 import zh from 'vee-validate/dist/locale/zh_CN'// 引入中文文件
 
+import  {checkForm} from '@/api/user'
+
 // 配置中文
 Validator.addLocale(zh)
 const config = {
@@ -31,6 +33,7 @@ const dictionary = {
         },
         attributes: {
             account:'账号',
+            nickname:'昵称',
             email: '邮箱',
             password: '密码',
             task_name: '任务名称',
@@ -46,6 +49,9 @@ const dictionary = {
             implementation_plan: '实施方案',
             assessment_standard: '考核指标',
             grading_standard: '评分标准',
+            summary:'摘要',
+            category:'分类',
+            tags:'标签',
             score: '考核分值'
         }
     }
@@ -61,6 +67,26 @@ Validator.extend('phone', {
         return /(?:^1[3456789]|^9[28])\d{9}$/.test(value)
     }
 })
+
+Validator.extend('nickname', {
+        messages: {
+            zh_CN: field => field + '已存在'
+        },
+        validate: value => {
+            return checkForm('nickname', value).then(data => {
+                    return data.data.status== 0 ? true : false;
+                }
+            )
+        }
+    }
+)
+
+
+
+
+
+
+
 
 
 

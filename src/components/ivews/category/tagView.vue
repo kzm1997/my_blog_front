@@ -8,7 +8,7 @@
         </div>
         <div class="category_container_body">
             <ul>
-                <li v-for="c in category" :key="c.id" @click="view(c)">
+                <li v-for="c in category" :key="c.id" @click="goView(c.id)">
                     <div class="category_body_tag">
                         <img :src="getavatarImg(c)">
                         <h3>{{c.categoryName}}</h3>
@@ -19,68 +19,81 @@
         </div>
         <div>
             <el-pagination
+                    class="me_pagination"
+                    v-if="getRouter"
                     layout="prev, pager, next"
-                    background=true
-                    page-size="8"
-
-                    :total="50">
+                    @current-change="handlePageChange"
+                    :current-page="pageNum"
+                    :page-size="pageSize"
+                    :total="total">
             </el-pagination>
         </div>
     </div>
 </template>
 
 <script>
-
+    import {getCategoryName, getCategoryDetail} from "@/api/category";
 
     export default {
         name: 'BlogAllCategoryTag',
-        created() {
-            this. getcategoryTitle(this.$route.params.id);
-            this.getCategorys(this.$route.params.id);
-        },
         data() {
             return {
                 category: [],
-                categoryTitle: ''
+                categoryTitle: '',
+                pageNum: 1,
+                pageSize: 8,
+                total: 10
             }
         },
-        computed: {},
+        computed: {
+            getRouter() {
+                return this.$route.params.id == 'all';
+            }
+        },
+        mounted() {
+            this.getcategoryTitle(this.$route.params.id);
+            if (this.$route.query.p!=undefined){
+                this.getCategorys(this.$route.params.id, this.pageSize, this.$route.query.p);
+            }else{
+                this.getCategorys(this.$route.params.id, this.pageSize, 1);
+            }
+        },
+        watch: {
+            $route(to) {
+                if (to.params.id=='all'){
+                    this.getCategorys(to.params.id, this.pageSize, to.query.p);
+                }
+            }
+        },
         methods: {
-            getcategoryTitle(id){
-                if (id!='all') {
-                    this.$http({
-                        method: 'get',
-                        url: '/category/getCategoryName',
-                        params: {
-                            id: id
-                        }
-                    }).then(res => {
+            goView(id){
+                this.$router.push({name:'cArticle',params:{id:id},query:{p:1}}).catch(()=>{})
+            },
+            handlePageChange(value) {
+                this.$router.push({name: 'tag', params: {id: 'all'}, query: {p: value}}).catch(()=>{});
+            },
+            getcategoryTitle(id) {
+                if (id != 'all') {
+                    getCategoryName(id).then(res => {
                         if (res.data.status == 0) {
                             this.categoryTitle = res.data.data.categoryName;
                         }
                     })
-                }else {
-                    this.categoryTitle='全部标签';
+                } else {
+                    this.categoryTitle = '全部标签';
                 }
             },
             getavatarImg: function (item) {
-                return 'http://localhost:8089/category' + item.avatar;
+                return  item.avatar;
             },
-            getCategorys(id) {
-                if (id =='all') {
+            getCategorys(id, PageSize, PageNum) {
+                if (id == 'all') {
                     id = null
                 }
-                this.$http({
-                    data: {
-                        id: id,
-                        pageNum: 1,
-                        pageSize: 8
-                    },
-                    method: 'post',
-                    url: '/category/detail'
-                }).then(res => {
+                getCategoryDetail(id, PageSize, PageNum).then(res => {
                     if (res.data.status == 0) {
                         this.category = res.data.data.list;
+                       this.total= res.data.data.totalCount;
                     }
                 }).catch(error => {
                     if (error && error.status === 1) {
@@ -151,6 +164,9 @@
                     }
                 }
             }
+        }
+        .me_pagination {
+            margin-top: 20px;
         }
     }
 </style>

@@ -6,11 +6,53 @@
   "description": "",
   "glyphs": [
     {
-      "icon_id": "8358225",
-      "name": "预览",
-      "font_class": "yulan",
-      "unicode": "e660",
-      "unicode_decimal": 58976
+      "icon_id": "6684305",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "7761519",
+      "name": "删 除 ",
+      "font_class": "shanchu",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "1793601",
+      "name": "转换",
+      "font_class": "zhuanhuan",
+      "unicode": "e664",
+      "unicode_decimal": 58980
+    },
+    {
+      "icon_id": "715877",
+      "name": "关注",
+      "font_class": "guanzhu1",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "8679356",
+      "name": "关注",
+      "font_class": "guanzhu",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "1071082",
+      "name": "评论2",
+      "font_class": "pinglun2",
+      "unicode": "e684",
+      "unicode_decimal": 59012
+    },
+    {
+      "icon_id": "6652218",
+      "name": "view",
+      "font_class": "view",
+      "unicode": "e6b3",
+      "unicode_decimal": 59059
     },
     {
       "icon_id": "6880945",
@@ -165,13 +207,6 @@
       "font_class": "copyright-fill",
       "unicode": "e6d8",
       "unicode_decimal": 59096
-    },
-    {
-      "icon_id": "1446463",
-      "name": "search",
-      "font_class": "search",
-      "unicode": "e623",
-      "unicode_decimal": 58915
     }
   ]
 }

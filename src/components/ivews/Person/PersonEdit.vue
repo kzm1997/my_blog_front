@@ -24,7 +24,7 @@
         data() {
             return {
                 leftClicks: [
-                    {id: 0, name: '基本资料', link: '/personedit/basematerialedit', active: true},
+                    {id: 0, name: '基本资料', link: '/personedit/basematerialedit', active: false},
                     {id: 1, name: '修改头像', link: '/personedit/avataredit', active: false},
                     {id: 2, name: '账号设置', link: '/personedit/accountedit', active: false},
                     {id: 3, name: '扩展资料', link: '/personedit/extendsinformation', active: false}
@@ -39,8 +39,15 @@
                 })
                this.leftClicks[id].active=true;
             }
+        },
+        mounted(){
+            let route=this.$route
+            this.leftClicks.forEach(function (item) {
+                if (route.fullPath==item.link){
+                    item.active=true;
+                }
+            })
         }
-
     }
 </script>
 

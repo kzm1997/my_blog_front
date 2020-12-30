@@ -20,11 +20,10 @@
     </div>
 </template>
 <script>
-
-
+    import { getCategoryDetail } from '@/api/category'
     export default {
         name: 'BlogAllCategoryTag',
-        created() {
+        mounted(){
             this.getCategorys(-1);
         },
         data() {
@@ -42,27 +41,15 @@
                 this.$router.push({name:'tag',params:{id:item.id}})
             },
             getavatarImg:function (item) {
-                return 'http://localhost:8089/category'+item.avatar;
+                return item.avatar;
             },
             getCategorys(id) {
                 if (id == 0) {
                     id = null;
                 }
-                this.$http({
-                    data: {
-                        id: id,
-                        pageNum: 1,
-                        pageSize: 8
-                    },
-                    method: 'post',
-                    url: '/category/detail'
-                }).then(res => {
+                getCategoryDetail(id,8,1).then(res => {
                     if (res.data.status == 0) {
                         this.category = res.data.data.list;
-                    }
-                }).catch(error => {
-                    if (error && error.status === 1) {
-                        this.$message({type: 'error', message: '标签加载失败', showClose: true})
                     }
                 })
             }

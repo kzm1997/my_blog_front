@@ -7,16 +7,16 @@
             <div class="extends_body">
                 <div class="extends_github">
                     <i class="iconfont iconGitHub"></i>
-                    <el-input v-model="extendsgithub" size="small">
+                    <el-input v-model="user.github" size="small">
                         <template slot="prepend">https://github.com/</template>
                     </el-input>
                 </div>
                <div class="extends_qq">
                    <i class="iconfont iconqq"></i>
-                   <el-input v-model="extendsqq" size="small"></el-input>
+                   <el-input v-model="user.qq" size="small"></el-input>
                </div>
 
-                <el-button>确定</el-button>
+<!--                <el-button>确定</el-button>-->
             </div>
         </el-card>
     </div>
@@ -27,7 +27,7 @@
         name: "ExtendsInformation",
         data() {
             return {
-                extends: {
+                user: {
                     github: '11',
                     qq: '111'
                 }

@@ -2,18 +2,14 @@
     <div class="article_view">
         <div class="article_view_left">
             <!--抽成组件-->
-            <article-content></article-content>
+            <article-content @parent="getUser" ></article-content>
             <el-card class="comment">
-                <comment :comments="commentData"></comment>
+                <comment></comment>
             </el-card>
-
         </div>
         <div class="article_view_right">
-            <el-card>1111</el-card>
-            <el-card>1111</el-card>
-            <el-card>1111</el-card>
-            <el-card>1111</el-card>
-            <el-card>1111</el-card>
+            <card-me class="card_me" :author="myauthor"></card-me>
+            <card-tag class="card_tag"></card-tag>
             <el-card class="js-toc">
                 <div slot="header" class="clearfix">
                     <span class="dictory">目录</span>
@@ -26,22 +22,32 @@
 
 <script>
     import articleContent from '@/components/article/articleContent'
-    import  tocbot from 'tocbot';
-    import * as CommentData from '../../comment/mock';
+
     import comment from '@/components/comment/comment.vue';
+    import cardTag from '@/components/card/CardTag';
+    import cardMe from '@/components/card/CardMe';
+
     export default {
         name: "articleView",
-        data(){
-            return{
-               commentData:[]
+        data() {
+            return {
+                commentData: [],
+                myauthor:{}
             }
         },
-        components:{
+        components: {
             articleContent,
-            comment
+            comment,
+            cardTag,
+            cardMe
         },
-        mounted(){
-            tocbot.init({
+        methods:{
+          getUser(author){
+              this.myauthor=author;
+          }
+        },
+        mounted() {
+   /*         tocbot.init({
                 // Where to render the table of contents.
                 tocSelector: '.toc',
                 // Where to grab the headings to build the table of contents.
@@ -53,37 +59,44 @@
                 scrollSmooth: true,
                 scrollSmoothOffset: -80,
                 headingsOffset: 200
-            });
-            this.commentData=CommentData.comment.data;
+            });*/
+
         }
     }
 </script>
 
-<style  lang="scss">
-   @import "~tocbot/dist/tocbot.css";
-      .article_view{
-          width: 1200px ;
-          margin: 120px auto;
-          display: flex;
-          .article_view_left{
+<style lang="scss">
+    @import "~tocbot/dist/tocbot.css";
+
+    .article_view {
+        width: 1200px;
+        margin: 120px auto;
+        display: flex;
+        .article_view_left {
             width: 820px;
             margin-right: 40px;
-          }
-          .article_view_right{
-              flex: 1;
-             .js-toc{
-                 position: sticky;
-                 top: 200px;
-                 text-align: left;
-                 .dictory{
-                     font-weight: bold;
-                 }
-             }
-          }
-          .comment{
-              margin-top: 30px;
-              text-align: left;
-          }
-      }
+        }
+        .article_view_right {
+            flex: 1;
+            .card_me{
+                margin-bottom: 20px;
+            }
+            .card_tag{
+                margin-bottom: 20px;
+            }
+            .js-toc {
+                position: sticky;
+                top: 200px;
+                text-align: left;
+                .dictory {
+                    font-weight: bold;
+                }
+            }
+        }
+        .comment {
+            margin-top: 30px;
+            text-align: left;
+        }
+    }
 
 </style>

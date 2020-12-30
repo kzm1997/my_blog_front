@@ -9,7 +9,7 @@ const ToekenKey = 'Authentication'
     setToken(token) {
         return Cookies.set(ToekenKey,token);
     },
-    remmoveToken() {
+    removeToken() {
         return Cookies.remove(ToekenKey);
     }
 }

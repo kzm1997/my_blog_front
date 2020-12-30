@@ -19,6 +19,8 @@ import blogwrite from '@/components/ivews/blog/BlogWrite'
 import ArticleView from '@/components/ivews/article/articleView'
 import CategoryView from '@/components/ivews/category/categoryView'
 import TagView from '@/components/ivews/category/tagView'
+import TimeLine from '@/components/timeline/TimeLine'
+import CategoryArticle from '@/components/ivews/category/categoryArticle'
 
 Vue.use(VueRouter)
 
@@ -33,27 +35,22 @@ const routes = [
                 path: '/',
                 name: 'index',
                 components: {
-                    header: SimpleHeader,
                     content: HomeContent,
                     footer: Footer
-                }
+                },
             },
             {
                 path: 'login',
                 name: 'login',
                 components: {
-                    header: SimpleHeader,
-                    content: Login,
-                    footer: Footer
+                    content: Login
                 }
             },
             {
                 path: 'register',
                 name: 'register',
                 components: {
-                    header: SimpleHeader,
-                    content: Register,
-                    footer: Footer
+                    content: Register
                 }
             },
             {
@@ -61,11 +58,10 @@ const routes = [
                 name: 'person',
                 components: {
                     header: SimpleHeader,
-                    content: PersonPage,
-                    footer: Footer
+                    content: PersonPage
                 },
-                meta:{
-                    requireLogin:true
+                meta: {
+                    requireLogin: true
                 }
             },
             {
@@ -74,6 +70,12 @@ const routes = [
                 components: {
                     header: SimpleHeader,
                     content: PersonEdit,
+                },
+                redirect: {
+                    name: 'basematerialedit'
+                },
+                meta: {
+                    requireLogin: true
                 },
                 children: [
                     {
@@ -104,12 +106,12 @@ const routes = [
                 components: {
                     content: blogwrite
                 },
-                meta:{
-                    requireLogin:true
+                meta: {
+                    requireLogin: true
                 }
             },
             {
-                path: 'articleView',
+                path: 'articleView/:id',
                 name: 'articleView',
                 components: {
                     header: SimpleHeader,
@@ -131,6 +133,23 @@ const routes = [
                     header: SimpleHeader,
                     content: TagView
                 }
+            },
+            {
+                path: 'timeline',
+                name: 'timeline',
+                components: {
+                    header: SimpleHeader,
+                    content: TimeLine
+                }
+            },
+            {
+                path: 'cArticle/:id',
+                name: 'cArticle',
+                components: {
+                    header: SimpleHeader,
+                    content: CategoryArticle,
+                    footer: Footer
+                }
             }
 
         ]
@@ -144,34 +163,54 @@ const router = new VueRouter({
     routes
 })
 
+const rpOnce = (() => {
+    let lastKey = null;
+    let timer = null;
+    return (cb = () => {
+    }, key) => {
+        if (lastKey === key) {
+            return;
+        }
+        clearTimeout(timer);
+        cb(key);
+        lastKey = key;
+        timer = setTimeout(() => {
+            clearTimeout(timer);
+            lastKey = null;
+        }, 1200);
+    };
+})();
+
+const toast = msg =>
+    rpOnce(iMsg => {
+        Message({
+            type: 'warning',
+            showClose: true,
+            message: iMsg
+        })
+    }, msg);
+const needAuth = new Set(['/login', '/register'])
 router.beforeEach((to, from, next) => {
-    //todo 这里可能要token过期判断
     if (auth.getToken()) {
-        console.log(111)
-        if (to.path === '/login' || to.path === '/register') {
-            next({path: '/'})
-        } else {
-            if (store.state.user.nickname.length === 0) {
-                store.dispatch('getUserInfo').then(() => {
-                    next()
-                }).catch(() => {
-                    next({path: '/'})
-                })
-            }
-        }
-    } else {
-        console.log(222)
-        if (to.matched.some(r =>r.meta.requireLogin)){
-            console.log(333)
-            Message({
-                type: 'warning',
-                showClose: true,
-                message: '请先登录哦'
+        if (needAuth.has(to.path)) {
+            next();
+        } else if (store.state.user.user.email.length === 0) {
+            store.dispatch('getUserInfo').then(() => {
+                next()
+            }).catch(() => {
+                next({path: '/'})
             })
-            next(from)
+        } else {
+            next()
         }
+    } else if (to.matched.some(r => r.meta.requireLogin)) {
+        toast('请先登录哦')
+        next(from);
+    } else {
         next()
     }
+
 })
+
 
 export default router

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <article-item v-for="item in list" :key="item.id" :item="item"></article-item>
+        <article-item v-for="item in articles" :key="item.id" :article="item"></article-item>
     </div>
 
 </template>
@@ -10,16 +10,17 @@
 
     export default {
         name: "articlePage",
+        props: ['articles'],
         data() {
             return {
-                list:[
-                    {title:"111",id:1},
-                    {title:"111",id:2},
-                    {title:"111",id:3},
-                    {title:"111",id:4},
-                    {title:"111",id:5}
-                ]
+
             }
+        },
+        mounted() {
+
+        },
+        methods: {
+
         },
         components: {
             articleItem

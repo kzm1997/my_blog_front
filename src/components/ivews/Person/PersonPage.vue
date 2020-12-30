@@ -3,39 +3,38 @@
         <div class="container_left">
             <div class="container_left_header">
                 <div class="header_Avatar">
-                    <el-avatar shape="circle" :size="160" fit="fit"
-                               src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"></el-avatar>
+                    <el-avatar shape="circle" :size="160" :fit="size"
+                               :src=user.avatar></el-avatar>
                 </div>
 
                 <div class="header_information">
                     <div class="header_information_title">
-                        <h1 class="person_name">个人用户名</h1>
+                        <h1 class="person_name">{{user.nickname}}</h1>
                         <el-button @click="toBaseEdit" type="text" class="title_button" size="medium">编辑资料</el-button>
                     </div>
-                    <span><i class="iconfont icondizhi1"></i>填写现居城市</span>
-                    <span><i class="iconfont iconxuexiao"></i>填写毕业院校</span>
-                    <span><i class="iconfont iconzhiye1"></i>填写所在公司/组织</span>
-                    <span><i class="iconfont iconlianjie"></i>填写个人主网站</span>
+                    <span><i class="iconfont icondizhi1"></i>{{user.city}}</span>
+                    <span><i class="iconfont iconxuexiao"></i>{{user.school}}</span>
+                    <span><i class="iconfont iconzhiye1"></i>{{user.company}}</span>
+                    <span><i class="iconfont iconlianjie"></i>{{user.personLink}}</span>
                 </div>
             </div>
             <div class="container_left_main">
                 <div class="left_main_title">
                     <ul>
-                        <li>
-                            <a> <i class="iconfont iconwenzhang-copy"></i><span>文章</span></a>
-                        </li>
-                        <li>
-                            <i class="iconfont iconxiaoxitongzhitixinglingshenglingdang "></i><span>动态</span>
-                        </li>
-                        <li>
-                            <i class="iconfont iconpinglun"></i><span>最新评论</span>
-                        </li>
-                        <li>
-                            <i class="iconfont iconremen"></i><span>热门</span>
+                        <li v-for="item in clickLi" :key="item.id" :class="{'active':item.active}"  @click="seeData(item.id)">
+                            <a><i :class="[item.class]"></i><span>{{item.name}}</span></a>
                         </li>
                     </ul>
                 </div>
             </div>
+            <ul>
+                <li v-for="(item,index) in personData" :key="index">
+                    <my-dynamic-article v-if="item.type=='myArticle'" :articleData="item"></my-dynamic-article>
+                    <my-article v-if="item.type=='article'" :articleData="item"></my-article>
+                    <my-comment v-if="item.type=='comment'" :commentData="item"></my-comment>
+                    <like-user v-if="item.type=='like'" :likeData="item"></like-user>
+                </li>
+            </ul>
         </div>
         <div class="container_right">
             <div class="right_desc">
@@ -51,20 +50,94 @@
                     </div>
                 </div>
                 <div class="desc_body">
-                    此人很懒,暂时没有个人简介
+                    {{user.motto}}
                 </div>
             </div>
+            <card-tag></card-tag>
         </div>
     </div>
 </template>
 
 <script>
+    import cardTag from '@/components/card/CardTag';
+    import myArticle from '@/components/article/MyArticle'
+    import MyComment from '@/components/comment/MyComment'
+    import likeUser from '@/components/card/LikeUser';
+    import MyDynamicArticle from "../../article/MyDynamicArticle";
+    import {getMyArticles,getDynamic,getMyArticleComment,getMyHot} from "../../../api/user";
+
     export default {
         name: "PersonPage",
         data() {
-            return {}
+            return {
+                size: 'container',
+                personData: [],
+                clickLi: [
+                    {id: 0, name: '文章', class: 'iconfont iconwenzhang-copy', active: true},
+                    {id: 1, name: '动态', class: 'iconfont iconxiaoxitongzhitixinglingshenglingdang ', active: false},
+                    {id: 2, name: '最新评论', class: 'iconfont iconpinglun', active: false},
+                    {id: 3, name: '热门', class: 'iconfont iconremen', active: false}
+
+                ],
+                actived:0
+            }
+        },
+        components: {
+            cardTag,
+            myArticle,
+            MyComment,
+            likeUser,
+            MyDynamicArticle
+        },
+        computed: {
+            user() {
+                let avatar = this.$store.getters.avatar
+                let city = this.$store.getters.city
+                let school = this.$store.getters.school
+                let company = this.$store.getters.company
+                let personLink = this.$store.getters.personLink
+                let nickname = this.$store.getters.nickname
+                let motto = this.$store.getters.motto
+                return {
+                    avatar, city, school, company, personLink, nickname, motto
+                }
+            }
+        },
+        mounted() {
+            this.seeData(0, 0);
         },
         methods: {
+            seeData(id) {
+                this.clickLi[this.actived].active=false;
+                this.clickLi[id].active=true;
+                this.$forceUpdate();
+                this.actived=id;
+                if (id == 0) {
+                    getMyArticles().then(res => {
+                        if (res.data.status == 0) {
+                            this.personData = res.data.data;
+                        }
+                    })
+                } else if (id==1) {
+                    getDynamic().then(res=>{
+                        if (res.data.status==0){
+                            this.personData = res.data.data;
+                        }
+                    })
+                }else if (id==2){
+                    getMyArticleComment().then(res=>{
+                        if (res.data.status==0){
+                            this.personData = res.data.data;
+                        }
+                    })
+                }else if (id==3){
+                    getMyHot().then(res=>{
+                        if (res.data.status==0){
+                            this.personData = res.data.data;
+                        }
+                    })
+                }
+            },
             toBaseEdit() {
                 this.$router.push('/personedit/basematerialedit');
             }
@@ -80,19 +153,21 @@
         display: flex;
         margin-top: 120px;
         height: 1000px;
+
         .container_left {
             display: flex;
             flex-direction: column;
+
             .container_left_main {
                 ul {
                     margin-top: 18px;
                     display: flex;
                     color: #969696;
-                    border-bottom: 1px solid #f0f0f0;
+                    border-bottom: 1px solid #e2e2e2;
+
                     li {
                         padding: 13px 20px;
                         cursor: pointer;
-
                         span {
                             font-size: 15px;
                             font-weight: 800;
@@ -100,6 +175,12 @@
                             padding-left: 8px;
                         }
                     }
+
+                    li.active {
+                        color: #646464;
+                        border-bottom: 2px solid #646464;
+                    }
+
                     li:hover {
                         color: #646464;
                         border-bottom: 2px solid #646464;
@@ -108,18 +189,28 @@
                 }
             }
         }
+
         .container_left_header {
-            background-color: rgb(246, 246, 246);
+            background-color: rgb(208, 208, 208, 0.3);
             display: flex;
+
+            .header_Avatar {
+                margin: 10px 10px;
+            }
+
             .header_information {
                 width: 440px;
                 padding-left: 24px;
                 justify-content: flex-start;
                 text-align: left;
-                padding-bottom: 8px;
+                padding-bottom: 14px;
+
                 .header_information_title {
                     display: flex;
                     justify-content: space-between;
+                    h1{
+                        margin-bottom: 10px;
+                    }
                     .title_button {
                         padding-right: 20px;
                         margin-bottom: 10px;
@@ -127,12 +218,14 @@
                         font-size: 16px;
                     }
                 }
+
                 .person_name {
                     font-size: 28px;
                     font-weight: 500;
                     line-height: 1.2;
                     margin-bottom: 20px;
                 }
+
                 span {
                     font-size: 14px;
                     color: #666666;
@@ -140,6 +233,7 @@
                     vertical-align: middle;
                     display: block;
                     margin-top: 10px;
+
                     i {
                         margin-right: 10px;
                     }
@@ -151,12 +245,13 @@
             width: 100px;
             height: 1000px;
             margin-left: 50px;
-            border: 1px solid red;
             display: flex;
             flex-direction: column;
             width: 30%;
             text-align: left;
+
             .right_desc {
+                margin-bottom: 30px;
 
                 .desc_header {
                     padding: 0 12px;
@@ -166,8 +261,10 @@
                     border-top-right-radius: 3px;
                     display: flex;
                     justify-content: space-between;
+
                     .desc_header_span {
                         line-height: 32px;
+
                         .dot {
                             display: inline-block;
                             width: 12px;
@@ -175,29 +272,34 @@
                             border-radius: 50%;
                             margin-right: 8px;
                         }
+
                         .desc_span_red {
                             background-color: #FF5F57;
                         }
+
                         .desc_span_yellow {
                             background-color: #FFBD2E;
                         }
+
                         .desc_span_green {
                             background-color: #28CA42;
                         }
                     }
-                    .desc_header_right{
+
+                    .desc_header_right {
                         margin-left: 8px;
                         font-size: 12px;
                         font-weight: normal;
                         line-height: 32px;
                         color: #999;
-                        span{
+
+                        span {
                             margin-left: 2px;
                         }
                     }
                 }
 
-                .desc_body{
+                .desc_body {
                     height: 140px;
                     background-color: #EEEEEE;
                     width: 100%;
